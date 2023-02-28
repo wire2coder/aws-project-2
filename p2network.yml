@@ -291,13 +291,14 @@ Resources:
             UserData:
                 Fn::Base64: !Sub |
                     #!/bin/bash
-                    apt-get update -y
-                    apt-get install unzip awscli -y
+                    apt-get update -y                    
                     apt-get install apache2 -y
                     systemctl start apache2.service
                     cd /var/www/html
-                    aws s3 cp s3://udacity-demo-111/udacity.zip .
-                    unzip -o udacity.zip
+                    touch index.html
+                    echo "<!DOCTYPE html><html><head><title>Udagram Project 2</title></head><body><h1>It works! Udagram, Udacity</h1></body></html>" > index.html
+
+
                     
             ImageId: !Ref AMI 
             IamInstanceProfile: !Ref ProfileWithRolesForOurApp
